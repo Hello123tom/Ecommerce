@@ -3,6 +3,7 @@ import User from "../models/userModel.js";
 import handleError from "../utils/handleError.js";
 import { sendToken } from "../utils/jwtToken.js";
 import { sendEmail } from "../utils/sendEmail.js";
+import { getClientUrl } from "../utils/clientUrl.js";
 import crypto from "crypto";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -101,7 +102,7 @@ export const requestPasswordReset = handleAsyncError(async (req, res, next) => {
         return next(new handleError("Something went wrong", 500));
     }
     console.log(resetToken);
-    const resetPasswordURL = `http://localhost/api/v1/reset/${resetToken}`;
+    const resetPasswordURL = `${getClientUrl()}/api/v1/reset/${resetToken}`;
     const message = `follow the link to reset your password: \n\n ${resetPasswordURL} \n\n if you have not requested this email, please ignore it.`;
 
     try {

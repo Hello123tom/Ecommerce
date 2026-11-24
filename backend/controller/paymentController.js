@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { stripe } from "../config/stripe.js";
 import handleAsyncError from "../middleware/handleAsyncError.js";
 import handleError from "../utils/handleError.js";
+import { getClientUrl } from "../utils/clientUrl.js";
 import Order from "../models/orderModel.js";
 import Product from "../models/productModel.js";
 
@@ -124,6 +125,7 @@ const markOrderUnpaid = async (session, paymentStatus) => {
 };
 
 export const Payment = handleAsyncError(async (req, res, next) => {
+    const clientUrl = getClientUrl();
     const { items, shippingInfo } = req.body || {};
     if (
         !Array.isArray(items) ||
@@ -249,7 +251,6 @@ export const Payment = handleAsyncError(async (req, res, next) => {
         totalPrice: totalCents / 100
     });
 
-    const clientUrl = (process.env.CLIENT_URL || "http://localhost:5173").replace(/\/+$/, "");
     let session;
     try {
         session = await stripe.checkout.sessions.create({
