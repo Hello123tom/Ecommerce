@@ -16,9 +16,12 @@ function MyOrder() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllMyOrders());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (error) {
       toast.error(error);
-      dispatch(removeErrors())
+      dispatch(removeErrors());
     }
   }, [dispatch, error]);
 

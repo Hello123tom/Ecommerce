@@ -39,11 +39,14 @@ function OrderDetails() {
     
     useEffect(() => {
         dispatch(getOrderDetails(orderId));
+    }, [dispatch, orderId]);
+
+    useEffect(() => {
         if (error) {
             toast.error(error, { position: "top-center", autoClose: 3000 });
             dispatch(removeErrors());
         }
-    }, [dispatch, orderId, error]);
+    }, [dispatch, error]);
     return (
         <>
             <PageTitle title={`Order #${orderId}`} />
