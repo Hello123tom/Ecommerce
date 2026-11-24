@@ -155,7 +155,7 @@ function CheckoutResult() {
                         {status === 'paid' &&(
                             <Link
                             className="checkout-result-button checkout-result-button-primary"
-                            to='/order/user'
+                            to='/orders/user'
                         >
                            View My Order
                         </Link>
