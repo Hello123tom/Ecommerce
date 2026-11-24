@@ -1,5 +1,5 @@
 import React from 'react'
-import '../UserStyles/UserDashBoard.css'
+import '../UserStyles/UserDashboard.css'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
